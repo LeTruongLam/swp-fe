@@ -4,12 +4,6 @@ export const Routers = {
     route: "/",
   },
 
-  client: {
-    home: {
-      label: "Home",
-      route: "/home",
-    },
-  },
   admin: {
     userManagement: {
       label: "User Management",

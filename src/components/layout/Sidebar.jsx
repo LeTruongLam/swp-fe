@@ -9,7 +9,7 @@ function Sidebar() {
 
   return (
     <div className="h-screen bg-white md:w-72">
-      <div className="p-4 w-max flex justify-center  h-full">
+      <div className="p-4 w-full flex justify-center  h-full">
         <div>
           <span className="ml-4 text-gray-600 text-sm font-medium "></span>
           <div className="mt-3 flex flex-col gap-2">

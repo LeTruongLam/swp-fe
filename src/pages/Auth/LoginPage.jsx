@@ -7,8 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import LoginForm from "@/components/auth/LoginForm";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { RoleEnum } from "@/utils/Enum";
+import { Tabs } from "@/components/ui/tabs";
 
 function LoginPage({ isOpen, setOpen }) {
   return (

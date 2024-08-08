@@ -1,12 +1,5 @@
-import { LayoutDashboard, Ticket, Users } from "lucide-react";
+import { Ticket, Users } from "lucide-react";
 import { Routers } from "@/config/RouterConfig";
-export const ClientLinks = [
-  {
-    icon: <LayoutDashboard className="h-5 w-5" />,
-    label: Routers.client.home.label,
-    route: Routers.client.home.route,
-  },
-];
 
 export const AdminLinks = [
   {

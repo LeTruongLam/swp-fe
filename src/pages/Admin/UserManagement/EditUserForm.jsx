@@ -43,10 +43,8 @@ function EditUserForm({ user, onClose, onSave }) {
       role,
     };
 
-    // Call the onSave callback with the updated user
     onSave(updatedUser);
 
-    // Close the dialog
     onClose();
   };
 
