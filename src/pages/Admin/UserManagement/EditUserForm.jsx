@@ -17,14 +17,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
-function EditUserForm({ user, onClose }) {
+import { useState, useEffect } from "react";
+
+function EditUserForm({ user, onClose, onSave }) {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState(user.password);
   const [role, setRole] = useState(user.role);
 
-  const handleSave = () => {};
+  // Update the form fields if the user prop changes
+  useEffect(() => {
+    setName(user.name);
+    setEmail(user.email);
+    setPassword(user.password);
+    setRole(user.role);
+  }, [user]);
+
+  const handleSave = () => {
+    // Update user object with new values
+    const updatedUser = {
+      ...user,
+      name,
+      email,
+      password,
+      role,
+    };
+
+    // Call the onSave callback with the updated user
+    onSave(updatedUser);
+
+    // Close the dialog
+    onClose();
+  };
 
   return (
     <Dialog open onOpenChange={onClose}>

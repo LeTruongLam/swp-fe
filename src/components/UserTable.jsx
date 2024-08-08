@@ -18,8 +18,8 @@ const ITEMS_PER_PAGE = 7;
 
 function UserTable() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [editUser, setEditUser] = useState(null);
-  const [users, setUsers] = useState(UsersData); // Sử dụng state để quản lý dữ liệu người dùng
+  const [editingUser, setEditingUser] = useState(null);
+  const [users, setUsers] = useState(UsersData);
 
   const totalPages = Math.ceil(users.length / ITEMS_PER_PAGE);
 
@@ -38,7 +38,16 @@ function UserTable() {
     const updatedUsers = users.filter((user) => user.id !== id);
     setUsers(updatedUsers);
   };
+  const handleEdit = (user) => {
+    setEditingUser(user);
+  };
 
+  const handleSaveEdit = (updatedUser) => {
+    setUsers((prevUsers) =>
+      prevUsers.map((user) => (user.id === updatedUser.id ? updatedUser : user))
+    );
+    setEditingUser(null);
+  };
   return (
     <div>
       <div className="flex justify-between  items-center px-3 py-5">
@@ -55,7 +64,9 @@ function UserTable() {
               <UserTableRow
                 key={item.id}
                 item={item}
-                onEdit={() => setEditUser(item)}
+                onEdit={() => {
+                  handleEdit(item);
+                }}
                 onDelete={() => handleDelete(item.id)}
               />
             ))}
@@ -85,8 +96,12 @@ function UserTable() {
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-        {editUser && (
-          <EditUserForm user={editUser} onClose={() => setEditUser(null)} />
+        {editingUser && (
+          <EditUserForm
+            user={editingUser}
+            onClose={() => setEditingUser(null)}
+            onSave={handleSaveEdit}
+          />
         )}
       </div>
     </div>
