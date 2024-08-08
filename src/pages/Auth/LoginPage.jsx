@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -8,17 +7,10 @@ import {
 } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import LoginForm from "@/components/auth/LoginForm";
-import { useTranslation } from "react-i18next";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RoleEnum } from "@/utils/Enum";
 
 function LoginPage({ isOpen, setOpen }) {
-  const { t } = useTranslation();
-  const [role, setRole] = useState(RoleEnum.ADMIN);
-  const handleRoleChange = (selectedRole) => {
-    setRole(selectedRole);
-  };
-
   return (
     <div className="flex flex-col justify-center items-center w-full">
       <Dialog
@@ -32,18 +24,14 @@ function LoginPage({ isOpen, setOpen }) {
           <Tabs defaultValue="account" className="min-w-[400px]">
             <Card className="border-none">
               <CardHeader className="pb-3 pt-0 px-0">
-                <CardTitle className="text-4xl">{t("LoginButton")}</CardTitle>
-                <CardDescription>{t("LoginContent")}</CardDescription>
+                <CardTitle className="text-4xl">Login</CardTitle>
+                <CardDescription>
+                  Please enter your username and password to access your
+                  account.
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2 py-0 px-0">
-                <Tabs defaultValue={role}>
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value={RoleEnum.CLIENT}>Staff</TabsTrigger>
-
-                    <TabsTrigger value={RoleEnum.ADMIN}>Admin</TabsTrigger>
-                  </TabsList>
-                </Tabs>
-                <LoginForm role={role} />
+                <LoginForm />
               </CardContent>
             </Card>
           </Tabs>

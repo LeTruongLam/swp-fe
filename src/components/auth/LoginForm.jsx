@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
-const LoginForm = ({ role }) => {
+const LoginForm = () => {
   const handleSubmit = () => {};
   return (
     <form className="flex flex-col gap-3" onSubmit={handleSubmit}>

@@ -1,5 +1,5 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 function UserTableRow({ item, onEdit, onDelete }) {
   return (
     <TableRow

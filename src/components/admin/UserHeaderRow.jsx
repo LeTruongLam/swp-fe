@@ -17,7 +17,9 @@ function UserHeaderRow() {
       <TableHead className="hidden md:block text-black text-left h-full basis-3/12">
         Role
       </TableHead>
-      <TableHead className="text-black h-full text-right basis-1/12"></TableHead>
+      <TableHead className="text-black h-full text-center basis-1/12">
+        Actions
+      </TableHead>
     </TableRow>
   );
 }

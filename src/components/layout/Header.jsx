@@ -6,25 +6,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTranslation } from "react-i18next";
-import { useContext, useState } from "react";
-import { AuthContext } from "@/context/authContext";
 function AccountDropDown() {
   const { t } = useTranslation();
-  const { currentUser } = useContext(AuthContext);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <img
           className="h-10 w-10 rounded-full ring-2 ring-white hover:opacity-75 cursor-pointer"
-          src={currentUser?.image}
+          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
           alt=""
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuItem>
           <LogOut className="mr-2 h-4 w-4" />
-          <span>{t("Logout")}</span>
+          <span>Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

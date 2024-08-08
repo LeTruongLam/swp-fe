@@ -1,4 +1,4 @@
-import UserTable from "@/components/UserTable";
+import UserTable from "@/components/admin/UserTable";
 
 function UserManagementPage() {
   return (
