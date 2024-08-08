@@ -1,13 +1,11 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,40 +18,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
-import { UsersData } from "@/constants";
-export function CreateUserForm({ onCreate }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+function EditUserForm({ user, onClose }) {
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [password, setPassword] = useState(user.password);
+  const [role, setRole] = useState(user.role);
 
-  const handleSave = () => {
-    const newUser = {
-      id: UsersData.length + 1,
-      name,
-      email,
-      password,
-      status: "Active",
-      role,
-    };
-
-    onCreate(newUser);
-    setName("");
-    setEmail("");
-    setPassword("");
-    setRole("");
-  };
+  const handleSave = () => {};
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button className="bg-blue-500 hover:bg-blue-600">Create user</Button>
-      </DialogTrigger>
+    <Dialog open onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Create user</DialogTitle>
+          <DialogTitle>Edit user</DialogTitle>
           <DialogDescription>
-            Create a user here. Click save when you're done.
+            Edit the user details here. Click save when you're done.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -63,7 +42,6 @@ export function CreateUserForm({ onCreate }) {
             </Label>
             <Input
               id="name"
-              placeholder="Enter user name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="col-span-3"
@@ -75,7 +53,6 @@ export function CreateUserForm({ onCreate }) {
             </Label>
             <Input
               id="email"
-              placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="col-span-3"
@@ -87,7 +64,6 @@ export function CreateUserForm({ onCreate }) {
             </Label>
             <Input
               id="password"
-              placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="col-span-3"
@@ -113,16 +89,16 @@ export function CreateUserForm({ onCreate }) {
           </div>
         </div>
         <DialogFooter>
-          <DialogClose asChild>
-            <Button
-              className="bg-blue-500 hover:bg-blue-600"
-              onClick={handleSave}
-            >
-              Save
-            </Button>
-          </DialogClose>
+          <Button
+            className="bg-blue-500 hover:bg-blue-600"
+            onClick={handleSave}
+          >
+            Save
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 }
+
+export default EditUserForm;

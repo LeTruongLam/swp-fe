@@ -1,10 +1,10 @@
 import EventTable from "@/components/EventTable";
 function EventsPage() {
   return (
-    <div className="bg-white rounded-md h-container-main my-5 px-3">
-      {/* <div className="flex justify-end py-3">
-        <Button className="bg-blue-500 hover:bg-blue-400 ">Create event</Button>
-      </div> */}
+    <div className="bg-white rounded-md h-[85vh] my-5 px-3">
+      <div className="flex justify-between  items-center px-3 py-5">
+        <h1 className="text-2xl  font-semibold">Events</h1>
+      </div>
       <EventTable />
     </div>
   );

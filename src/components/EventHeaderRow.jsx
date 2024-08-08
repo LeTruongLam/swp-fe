@@ -1,16 +1,13 @@
 import { TableHead, TableRow } from "@/components/ui/table";
 function EventHeaderRow() {
   return (
-    <TableRow className="grid grid-cols-4 py-4">
-      <TableHead className="text-black h-full basis-3/12">Title</TableHead>
-      <TableHead className="text-black h-full basis-2/12">Date</TableHead>
-      <TableHead className="text-black h-full basis-3/12">
-        Description
-      </TableHead>
-      <TableHead className="text-black text-left h-full basis-3/12">
+    <TableRow className="grid md:grid-cols-4 grid-cols-3 py-4">
+      <TableHead className="text-black h-full ">Title</TableHead>
+      <TableHead className="text-black h-full ">Date</TableHead>
+      <TableHead className="text-black h-full ">Description</TableHead>
+      <TableHead className="text-black hidden md:block text-left h-full ">
         Status
       </TableHead>
-      <TableHead className="text-black h-full text-right basis-1/12"></TableHead>
     </TableRow>
   );
 }

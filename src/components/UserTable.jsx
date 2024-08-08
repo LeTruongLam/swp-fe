@@ -1,65 +1,94 @@
-import React from "react";
+import React, { useState } from "react";
+import { Table, TableBody, TableHeader } from "@/components/ui/table";
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableHeader,
-} from "@/components/ui/table";
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import UserHeaderRow from "./UserHeaderRow";
 import UserTableRow from "./UserTableRow";
+import { UsersData } from "@/constants";
+import EditUserForm from "@/pages/Admin/UserManagement/EditUserForm";
+import { CreateUserForm } from "@/pages/Admin/UserManagement/CreateUserForm";
 
-const users = [
-  {
-    name: "John Doe",
-    email: "john@example.com",
-    password: "********",
-    status: "Active",
-    role: "Visitor",
-  },
-  {
-    name: "Jane Smith",
-    email: "jane@example.com",
-    password: "********",
-    status: "Inactive",
-    role: "Sponsor",
-  },
-  {
-    name: "Alice Johnson",
-    email: "alice@example.com",
-    password: "********",
-    status: "Active",
-    role: "Event Operator",
-  },
-  {
-    name: "Bob Brown",
-    email: "bob@example.com",
-    password: "********",
-    status: "Pending",
-    role: "Checking Staff",
-  },
-  {
-    name: "Charlie Davis",
-    email: "charlie@example.com",
-    password: "********",
-    status: "Active",
-    role: "Visitor",
-  },
-];
+const ITEMS_PER_PAGE = 7;
 
 function UserTable() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [editUser, setEditUser] = useState(null);
+  const [users, setUsers] = useState(UsersData); // Sử dụng state để quản lý dữ liệu người dùng
+
+  const totalPages = Math.ceil(users.length / ITEMS_PER_PAGE);
+
+  const handlePageChange = (page) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentData = users.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const handleCreate = (newUser) => {
+    setUsers((prevUsers) => [...prevUsers, newUser]);
+  };
+  const handleDelete = (id) => {
+    const updatedUsers = users.filter((user) => user.id !== id);
+    setUsers(updatedUsers);
+  };
+
   return (
     <div>
-      <Table>
-        <TableCaption className="mt-3"></TableCaption>
-        <TableHeader>
-          <UserHeaderRow />
-        </TableHeader>
-        <TableBody>
-          {users.map((item, index) => (
-            <UserTableRow key={item.email} item={item} />
-          ))}
-        </TableBody>
-      </Table>
+      <div className="flex justify-between  items-center px-3 py-5">
+        <h1 className="text-2xl  font-semibold">User Management</h1>
+        <CreateUserForm onCreate={handleCreate} />
+      </div>
+      <div className="flex flex-col h-[73vh] justify-between">
+        <Table>
+          <TableHeader>
+            <UserHeaderRow />
+          </TableHeader>
+          <TableBody>
+            {currentData.map((item) => (
+              <UserTableRow
+                key={item.id}
+                item={item}
+                onEdit={() => setEditUser(item)}
+                onDelete={() => handleDelete(item.id)}
+              />
+            ))}
+          </TableBody>
+        </Table>
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                onClick={() => handlePageChange(currentPage - 1)}
+              />
+            </PaginationItem>
+            {[...Array(totalPages)].map((_, index) => (
+              <PaginationItem key={index}>
+                <PaginationLink
+                  isActive={index + 1 === currentPage}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext
+                onClick={() => handlePageChange(currentPage + 1)}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+        {editUser && (
+          <EditUserForm user={editUser} onClose={() => setEditUser(null)} />
+        )}
+      </div>
     </div>
   );
 }
